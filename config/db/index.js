@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const CONNECT_STRING = 'mongodb://localhost:27017/demo_blog_dev'
-async function connect(){
+const CONNECT_STRING = 'mongodb://localhost:27017/hapi-demo'
+const connect = async () => {
     try {
         await mongoose.connect(CONNECT_STRING, {
             useNewUrlParser: true,
@@ -14,4 +14,4 @@ async function connect(){
     }
 }
 
-module.exports = {connect};
+module.exports = connect;
