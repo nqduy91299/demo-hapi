@@ -1,32 +1,31 @@
-'use strict';
+"use strict";
+const cors = require("hapi-modern-cors");
+const Hapi = require("@hapi/hapi");
+const routes = require("./src/routes");
+const dbConnect = require("./config/db");
 
-const Hapi = require('@hapi/hapi');
-const routes = require('./src/routes');
-const dbConnect = require('./config/db') 
+require("dotenv").config();
 
-require('dotenv').config()
-
-dbConnect()
-
+dbConnect();
 
 const init = async () => {
-
     const server = Hapi.server({
-        port: 3000,
-        host: 'localhost'
+        port: "3000",
+        host: "localhost",
+        routes: {
+            cors: true
+        }
     });
 
-    server.route(routes)
+    server.route(routes);
 
     await server.start();
-    console.log('Server running on %s', server.info.uri);
+    console.log("Server running on %s", server.info.uri);
 };
 
-process.on('unhandledRejection', (err) => {
-
+process.on("unhandledRejection", (err) => {
     console.log(err);
     process.exit(1);
 });
-
 
 init();

@@ -50,7 +50,7 @@ class StudentController{
     async getAll(req, h){
         try {
             const result = await Student.find().select(['-__v', '-password']);
-            return result
+            return {success: true, data: result, message: 'Get successful'}
         } catch (error) {
             return h.response(error).code(500);
         }
